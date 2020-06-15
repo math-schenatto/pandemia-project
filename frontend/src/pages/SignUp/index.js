@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
+import Select from 'react-select'
 import * as Yup from 'yup';
+
+import { signUpRequest } from '../../store/modules/auth/actions';
 
 import logo from '../../assets/logo.png';
 
@@ -11,10 +15,20 @@ const schema = Yup.object().shape({
   password: Yup.string().required('A senha é obrigatória'),
 });
 
+const options = [
+  { value: 'cid', title: 'Cidadão' },
+  { value: 'provider', title: 'Ong' },
+];
+
 function SignUp() {
-  
-  function handleSubmit(data){
-    console.tron.log(data);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ name, email, password, user_type }){
+    console.tron.log(user_type)
+    const provider = user_type === 'Cidadão'
+    ? false
+    : true;
+    dispatch(signUpRequest(name, email, password, provider));
   }
   
   return  (
@@ -24,6 +38,7 @@ function SignUp() {
     <Form schema={schema} onSubmit={handleSubmit}>
       <Input name="name" placeholder="Nome completo"/>
       <Input name="email" type="email" placeholder="Seu e-mail"/>
+      <Select name="user_type" options={options} placeholder="Qual seu tipo de conta?" />
       <Input name="password" type="password" placeholder="Sua senha"/>
 
       <button type="submit"> Criar conta </button>

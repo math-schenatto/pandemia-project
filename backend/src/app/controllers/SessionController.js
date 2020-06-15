@@ -8,7 +8,6 @@ class SessionController {
   async store(req, res) {
     
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required(),
     });
@@ -18,14 +17,14 @@ class SessionController {
     }
     
     const { email, password} = req.body;
-
+    console.log('oi');
     const user = await User.findOne({ 
       where: { email },
       include: [
         {
           model: File,
           as: 'avatar',
-          attributes: ['id', 'path'],
+          attributes: ['id', 'path', 'url'],
         },  
       ],
     });
@@ -38,14 +37,14 @@ class SessionController {
       return res.status(401).json({ error: 'Senha inválida.'});
     }
 
-    const { id, name, avatar, provider } = user;
+    const { id, name, avatar } = user;
 
+    console.log(user);
     return res.json({
       user: {
         id,
         name,
         email,
-        provider,
         avatar,
       },
       token: jwt.sign({ id }, authConfig.secret, {
