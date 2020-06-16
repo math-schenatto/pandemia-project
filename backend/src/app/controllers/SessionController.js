@@ -37,7 +37,7 @@ class SessionController {
       return res.status(401).json({ error: 'Senha inválida.'});
     }
 
-    const { id, name, avatar } = user;
+    const { id, name, avatar, provider } = user;
 
     console.log(user);
     return res.json({
@@ -45,6 +45,7 @@ class SessionController {
         id,
         name,
         email,
+        provider,
         avatar,
       },
       token: jwt.sign({ id }, authConfig.secret, {

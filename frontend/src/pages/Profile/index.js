@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import { Form, Input, Textarea } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signOut } from '../../store/modules/auth/actions';
@@ -27,6 +27,8 @@ function Profile() {
         <AvatarInput name="avatar_id" />
         <Input name="name" placeholder="Nome Completo"/>
         <Input name="email" type="email" placeholder="Seu endereço de e-mail"/>
+        <Textarea name="description" wrap="hard" type="text" placeholder="Descrição"/>
+        <Input name="address" type="text" placeholder="Endereço"/>
 
         <hr />
 

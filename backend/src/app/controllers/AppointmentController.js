@@ -1,5 +1,5 @@
 import Appointment from '../models/Appointment';
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, subHours } from 'date-fns';
 import User from '../models/User';
 import File from '../models/File';
 import * as Yup from 'yup';
@@ -80,6 +80,28 @@ class AppointmentController {
       gathering_place,
       date,
     });
+
+    return res.json(appointment);
+  }
+
+  async delete(req, res){
+    const appointment = await Appointment.findByPk(req.params.id);
+
+    if(appointment.user_id != req.userId){
+      return res.status(401).json({
+        error: "Permissão negada",
+      });
+    }
+
+    const dateWithSub = subHours(appointment.date, 2);
+
+    if(isBefore(dateWithSub, new Date())){
+      return res.status(401).json({ error: 'Não é permitido cancelar pelo horário'});
+    }
+
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
 
     return res.json(appointment);
   }

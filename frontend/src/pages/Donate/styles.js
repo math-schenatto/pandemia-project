@@ -10,11 +10,11 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: 30px;
 
-    input, textarea {
+    input, textarea, select {
       background: rgba(0, 0, 0, 0.1);
       border: 0;
       border-radius: 4px;
-      height: 44px;
+      height: 80px;
       padding: 0 15px;
       color: #fff;
       margin: 0 0 10px;

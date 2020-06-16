@@ -20,7 +20,6 @@ function SignIn() {
   const loading = useSelector(state => state.auth.loading);
   
   function handleSubmit({ email, password}){
-    //console.tron.log(data);
     dispatch(signInRequest(email, password));
   }
   

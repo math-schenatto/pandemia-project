@@ -22,13 +22,15 @@ class UserController{
     }
     
     console.log(req.body);
-    const { id, name, email, provider} = await User.create(req.body);
+    const { id, name, email, provider, description, address } = await User.create(req.body);
 
     return res.json({
       id,
       name,
       email,
-      provider
+      provider,
+      description,
+      address
     });
   }
 
@@ -67,12 +69,12 @@ class UserController{
 
     await user.update(req.body);
 
-    const { id, name, avatar} = await User.findByPk(req.userId, {
+    const { id, name, description, address, avatar} = await User.findByPk(req.userId, {
       include: [
         {
           model: File,
           as: 'avatar',
-          attributes: ['id', 'path'],
+          attributes: ['id', 'path', 'url'],
         },
       ],
     });
@@ -81,6 +83,8 @@ class UserController{
       id,
       name,
       email,
+      description,
+      address,
       avatar,
     });
   }

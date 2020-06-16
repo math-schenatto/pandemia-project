@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
-import Select from 'react-select'
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import { signUpRequest } from '../../store/modules/auth/actions';
+import Select from '../../components/Select';
+import Input from '../../components/Input';
 
 import logo from '../../assets/logo.png';
 
@@ -16,16 +17,15 @@ const schema = Yup.object().shape({
 });
 
 const options = [
-  { value: 'cid', title: 'Cidadão' },
-  { value: 'provider', title: 'Ong' },
+  { value: 'cid', label: 'Doações' },
+  { value: 'provider', label: 'Ong' },
 ];
 
 function SignUp() {
   const dispatch = useDispatch();
 
-  function handleSubmit({ name, email, password, user_type }){
-    console.tron.log(user_type)
-    const provider = user_type === 'Cidadão'
+  function handleSubmit({ name, email, password, teste }){
+    const provider = teste === 'cid'
     ? false
     : true;
     dispatch(signUpRequest(name, email, password, provider));
@@ -35,10 +35,10 @@ function SignUp() {
     <>
     <img src={logo} alt="App de Doações" width="90px" height="68px" viewBox="0 0 90 68"/>
 
-    <Form schema={schema} onSubmit={handleSubmit}>
+    <Form schema={schema} onSubmit={handleSubmit} initialData={{ teste: 1 }}>
       <Input name="name" placeholder="Nome completo"/>
       <Input name="email" type="email" placeholder="Seu e-mail"/>
-      <Select name="user_type" options={options} placeholder="Qual seu tipo de conta?" />
+      <Select name="teste"  options={options} placeholder="Defina o tipo de usuário"/>
       <Input name="password" type="password" placeholder="Sua senha"/>
 
       <button type="submit"> Criar conta </button>

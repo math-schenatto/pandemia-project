@@ -18,6 +18,7 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.user = user;
   
     yield put(signInSuccess(token, user));
   
@@ -51,10 +52,11 @@ export function* signUp({ payload }) {
 export function setToken({ payload }){
   if(!payload) return;
 
-  const { token } = payload.auth;
+  const { token, user } = payload.auth;
 
   if (token) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.user = user;
   }
 }
 

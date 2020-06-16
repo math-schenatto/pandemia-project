@@ -6,6 +6,7 @@ import OngController from './app/controllers/OngController';
 import FileController from './app/controllers/FileController';
 import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
+import AvailableController from './app/controllers/AvailableController';
 import authMiddleware from './app/middlewares/auth';
 import multerConfig from './config/multer';
 
@@ -19,9 +20,11 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.get('/ongs', OngController.index);
+routes.get('/ongs/:providerId/available', AvailableController.index);
 
 routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
+routes.delete('/appointments/:id', AppointmentController.delete);
 
 routes.get('/schedule', ScheduleController.index)
 

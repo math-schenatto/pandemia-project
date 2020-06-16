@@ -23,7 +23,7 @@ function Header() {
               <strong>{profile.name}</strong>
               <Link to="/profile">Perfil</Link>
             </div>
-            <img src={profile.avatar.url || "https://api.adorable.io/avatars/57/abott@adorable.png"} alt="Matheus Schenatto"/>
+            <img src={!!(profile.avatar)?profile.avatar.url:"https://api.adorable.io/avatars/57/abott@adorable.png"} alt="Matheus Schenatto"/>
           </Profile>
         </aside>
 
