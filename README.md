@@ -20,7 +20,7 @@ as ONGs que fazer o trabalho de levar as doações até as pessoas que necessita
 que tem objetos para doação e muitas vezes não sabem para quem doar. 
 </p>
 
-<h3>Tecnologias:</h3>
+Tecnologias:
 - Node
 - Javascript
 - PostgreSQL
