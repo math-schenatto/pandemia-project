@@ -26,8 +26,8 @@ function Profile() {
       <Form initialData={profile} onSubmit={handleSubmit}>
         <AvatarInput name="avatar_id" />
         <Input name="name" placeholder="Nome Completo"/>
-        <Input name="email" type="email" placeholder="Seu endereço de e-mail"/>
-        <Textarea name="description" wrap="hard" type="text" placeholder="Descrição"/>
+        <Input name="email" type="email" placeholder="Seu endereço de e-mail" />
+        <Textarea name="description" wrap="hard" type="text" placeholder="Descrição" />
         <Input name="address" type="text" placeholder="Endereço"/>
 
         <hr />
