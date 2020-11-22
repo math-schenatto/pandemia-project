@@ -22,6 +22,8 @@ que tem objetos para doação e muitas vezes não sabem para quem doar.
 
 Tecnologias:
 - Node
+- React
+- React Hooks
 - Javascript
 - PostgreSQL
 
